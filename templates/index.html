@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendation Show List</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <h1>Recommendation Show List</h1>
+        <p>Discover movies you may enjoy</p>
+        <span class="version">Application {{ version | upper }}</span>
+    </header>
+
+    <main class="container">
+        <h2>Recommended Movies</h2>
+
+        {% if version in ["v2", "v3"] %}
+        <form method="GET" action="/" class="controls">
+            <div class="field">
+                <label for="category">Filter by category</label>
+                <select name="category" id="category">
+                    <option value="All"
+                        {% if category == "All" %}selected{% endif %}>
+                        All Categories
+                    </option>
+                    {% for item_category in categories %}
+                    <option value="{{ item_category }}"
+                        {% if category == item_category %}selected{% endif %}>
+                        {{ item_category }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="min_rating">Minimum rating</label>
+                <select name="min_rating" id="min_rating">
+                    {% for rating in [0, 7, 8, 9] %}
+                    <option value="{{ rating }}"
+                        {% if min_rating == rating %}selected{% endif %}>
+                        {{ rating }} and above
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            {% if version == "v3" %}
+            <div class="field">
+                <label for="sort_by">Sort results</label>
+                <select name="sort_by" id="sort_by">
+                    <option value="name"
+                        {% if sort_by == "name" %}selected{% endif %}>
+                        Name (A-Z)
+                    </option>
+                    <option value="rating"
+                        {% if sort_by == "rating" %}selected{% endif %}>
+                        Highest rating first
+                    </option>
+                    <option value="category"
+                        {% if sort_by == "category" %}selected{% endif %}>
+                        Category (A-Z)
+                    </option>
+                </select>
+            </div>
+            {% endif %}
+
+            <button type="submit">Apply</button>
+            <a href="/" class="reset">Reset</a>
+        </form>
+        {% endif %}
+
+        <p class="count">Showing {{ items | length }} movie(s)</p>
+
+        <section class="movie-list">
+            {% for item in items %}
+            <article class="movie-card">
+                <div>
+                    <h3>{{ item.name }}</h3>
+                    <p class="category">{{ item.category }}</p>
+                </div>
+                <div class="rating">
+                    ★ {{ "%.1f" | format(item.rating) }}/10
+                </div>
+            </article>
+            {% else %}
+            <p>No movies match your selected filters.</p>
+            {% endfor %}
+        </section>
+    </main>
+
+    <footer>
+        <p>24MIS0464 | Recommendation Show List</p>
+    </footer>
+</body>
+</html>

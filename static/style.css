@@ -1,0 +1,128 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f5fb;
+    color: #24304a;
+}
+
+.header {
+    background: linear-gradient(135deg, #243b80, #5478db);
+    color: white;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+.header h1 {
+    margin: 0 0 10px;
+}
+
+.version {
+    display: inline-block;
+    background: white;
+    color: #243b80;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 0 18px;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 15px;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-width: 150px;
+}
+
+select, button, .reset {
+    padding: 11px;
+    border: 1px solid #d3d9e7;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+button {
+    background: #3156b8;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #203e91;
+}
+
+.reset {
+    text-decoration: none;
+    color: #24304a;
+    background: #f3f5fb;
+}
+
+.count {
+    color: #65708a;
+}
+
+.movie-list {
+    display: grid;
+    gap: 15px;
+}
+
+.movie-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 3px 12px #1d2b5010;
+}
+
+.movie-card h3 {
+    margin: 0 0 8px;
+}
+
+.category {
+    margin: 0;
+    color: #65708a;
+}
+
+.rating {
+    color: #c27b00;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #65708a;
+}
+
+@media (max-width: 500px) {
+    .movie-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
